@@ -92,7 +92,10 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 app.get('/info', (request, response) => {
   const date = new Date(Date.now())
-  response.send(`Phonebook has info of ${persons.length} persons\n\n${date}`)
+
+  Person.find({}).then(persons => {
+    response.send(`Phonebook has info of ${persons.length} persons\n\n${date}`)
+  })
 })
 
 app.use(unknownEndpoint)
